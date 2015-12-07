@@ -12,20 +12,20 @@ Private Function MSComm_Recv (ms_comm)
 		recv_buffer = recv_buffer & ms_comm.Input
 		'MsgBox Cstr(i)&Cstr(recv_buffer)
 		i=i+1
-	Loop Until ms_comm.InBufferCount=0'InStr(recv_buffer, "OK")' ä»ä¸²è¡Œç«¯å£è¯» "OK" å“åº”ã€‚
+	Loop Until ms_comm.InBufferCount=0'InStr(recv_buffer, "OK")' ´Ó´®ĞĞ¶Ë¿Ú¶Á "OK" ÏìÓ¦¡£
 	MSComm_Recv = recv_buffer
 End Function
 Private Function MSComm_Open (commPort, settings)
 	comm_name = "MSCOMMLib.MSComm." + Cstr(commPort)
 	Set ms_comm = createObject(comm_name)
-	' ä½¿ç”¨ COM1ã€‚
+	' Ê¹ÓÃ COM1¡£
 	ms_comm.CommPort = commPort
-	' 9600 æ³¢ç‰¹ï¼Œæ— å¥‡å¶æ ¡éªŒï¼Œ8 ä½æ•°æ®ï¼Œä¸€ä¸ªåœæ­¢ä½ã€‚
+	' 9600 ²¨ÌØ£¬ÎŞÆæÅ¼Ğ£Ñé£¬8 Î»Êı¾İ£¬Ò»¸öÍ£Ö¹Î»¡£
 	ms_comm.Settings = settings
-	' å½“è¾“å…¥å ç”¨æ—¶ï¼Œ
-	' å‘Šè¯‰æ§ä»¶è¯»å…¥æ•´ä¸ªç¼“å†²åŒºã€‚
+	' µ±ÊäÈëÕ¼ÓÃÊ±£¬
+	' ¸æËß¿Ø¼ş¶ÁÈëÕû¸ö»º³åÇø¡£
 	ms_comm.InputLen = 0
-	'...æ‰“å¼€ä¸²å£
+	'...´ò¿ª´®¿Ú
 	If ms_comm.PortOpen = False Then
 		ms_comm.PortOpen = True
 	End If
@@ -35,7 +35,6 @@ Private Function MSComm_Open (commPort, settings)
 End Function
 CommPort = 1
 Settings = "115200,N,8,1"
-
 set MSComm = MSComm_Open(CommPort, Settings)
 
 'test
@@ -44,7 +43,7 @@ MSComm_Send MSComm , send_String
 MSComm_Send_crlf MSComm
 
 recv_String = MSComm_Recv(MSComm)
-'è·å–æœ€åä¸€è¡Œå­—ç¬¦ä¸²
+'»ñÈ¡×îºóÒ»ĞĞ×Ö·û´®
 recv_StringArray = split(recv_String,vbLf)
 last_idx=ubound(recv_StringArray)-1
 last_recv_String = recv_StringArray(last_idx)
